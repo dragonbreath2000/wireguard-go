@@ -1,4 +1,4 @@
-module github.com/sagernet/wireguard-go
+module github.com/dragonbreath2000/wireguard-go
 
 go 1.18
 

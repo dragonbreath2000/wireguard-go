@@ -11,12 +11,12 @@ import (
 	"sync"
 	"time"
 
+	"github.com/dragonbreath2000/wireguard-go/conn"
+	"github.com/dragonbreath2000/wireguard-go/ratelimiter"
+	"github.com/dragonbreath2000/wireguard-go/rwcancel"
+	"github.com/dragonbreath2000/wireguard-go/tun"
 	"github.com/sagernet/sing/common/atomic"
 	"github.com/sagernet/sing/service/pause"
-	"github.com/sagernet/wireguard-go/conn"
-	"github.com/sagernet/wireguard-go/ratelimiter"
-	"github.com/sagernet/wireguard-go/rwcancel"
-	"github.com/sagernet/wireguard-go/tun"
 )
 
 type Device struct {

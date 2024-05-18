@@ -11,8 +11,8 @@ import (
 	"sync"
 	"time"
 
+	"github.com/dragonbreath2000/wireguard-go/conn"
 	"github.com/sagernet/sing/common/atomic"
-	"github.com/sagernet/wireguard-go/conn"
 )
 
 type Peer struct {

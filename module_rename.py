@@ -7,7 +7,7 @@ import fileinput
 
 
 PKG_ORIGINAL = "golang.zx2c4.com/wireguard"
-PKG_NEW = "github.com/sagernet/wireguard-go"
+PKG_NEW = "github.com/dragonbreath2000/wireguard-go"
 
 EXTENSIONS = [".go", ".md", ".mod", ".sh"]
 

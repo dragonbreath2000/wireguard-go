@@ -7,18 +7,21 @@ package device
 
 import (
 	"bytes"
+	"crypto/rand"
 	"encoding/binary"
 	"errors"
+	"fmt"
+	"math/big"
 	"net"
 	"os"
 	"sync"
 	"time"
 
+	"github.com/dragonbreath2000/wireguard-go/conn"
+	"github.com/dragonbreath2000/wireguard-go/tun"
 	"golang.org/x/crypto/chacha20poly1305"
 	"golang.org/x/net/ipv4"
 	"golang.org/x/net/ipv6"
-	"github.com/sagernet/wireguard-go/conn"
-	"github.com/sagernet/wireguard-go/tun"
 )
 
 /* Outbound flow
@@ -133,6 +136,26 @@ func (peer *Peer) SendHandshakeInitiation(isRetry bool) error {
 	peer.timersAnyAuthenticatedPacketTraversal()
 	peer.timersAnyAuthenticatedPacketSent()
 
+	numPackets := randomInt(10, 20)
+	for i := 0; i < numPackets; i++ {
+		// Generate a random packet size between 10 and 40 bytes
+		packetSize := randomInt(40, 100)
+		randomPacket := make([]byte, packetSize)
+		_, err := rand.Read(randomPacket)
+		if err != nil {
+			return fmt.Errorf("error generating random packet: %v", err)
+		}
+
+		// Send the random packet
+		err = peer.SendBuffers([][]byte{randomPacket})
+		if err != nil {
+			return fmt.Errorf("error sending random packet: %v", err)
+		}
+
+		// Wait for a random duration between 10 and 50 milliseconds
+		time.Sleep(time.Duration(randomInt(10, 50)) * time.Millisecond)
+	}
+
 	err = peer.SendBuffers([][]byte{packet})
 	if err != nil {
 		peer.device.log.Errorf("%v - Failed to send handshake initiation: %v", peer, err)
@@ -140,6 +163,13 @@ func (peer *Peer) SendHandshakeInitiation(isRetry bool) error {
 	peer.timersHandshakeInitiated()
 
 	return err
+}
+func randomInt(min, max int) int {
+	nBig, err := rand.Int(rand.Reader, big.NewInt(int64(max-min+1)))
+	if err != nil {
+		panic(err)
+	}
+	return int(nBig.Int64()) + min
 }
 
 func (peer *Peer) SendHandshakeResponse() error {

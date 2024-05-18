@@ -9,8 +9,8 @@ import (
 	"net"
 	"os"
 
+	"github.com/dragonbreath2000/wireguard-go/rwcancel"
 	"golang.org/x/sys/unix"
-	"github.com/sagernet/wireguard-go/rwcancel"
 )
 
 type UAPIListener struct {

@@ -7,7 +7,7 @@
 
 package device
 
-import "github.com/sagernet/wireguard-go/conn"
+import "github.com/dragonbreath2000/wireguard-go/conn"
 
 const (
 	QueueStagedSize            = conn.IdealBatchSize

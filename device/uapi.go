@@ -18,7 +18,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/sagernet/wireguard-go/ipc"
+	"github.com/dragonbreath2000/wireguard-go/ipc"
 )
 
 type IPCError struct {
